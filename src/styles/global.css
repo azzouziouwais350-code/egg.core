@@ -1,0 +1,38 @@
+/* Base : reset léger, texte, accessibilité. Une seule identité visuelle : pas de thèmes. */
+*, *::before, *::after { box-sizing: border-box; }
+
+html { -webkit-text-size-adjust: 100%; }
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: var(--abyss);
+  color: var(--moon);
+  font-family: var(--f-text);
+  font-size: 16px;
+  line-height: 1.45;
+  cursor: url(../assets/eggShellCursor.png), auto;
+  overflow-x: hidden;
+}
+
+button, input, label.toggle { cursor: url(../assets/eggShellCursor.png), pointer; }
+button:hover:not(:disabled), label.toggle:hover { cursor: url(../assets/eggCursor.png), pointer; }
+button:disabled { cursor: not-allowed; }
+
+h1, h2, p { margin: 0; }
+img { image-rendering: pixelated; image-rendering: crisp-edges; image-rendering: pixelated; -webkit-user-drag: none; user-select: none; }
+
+.sr-only {
+  position: absolute !important; width: 1px; height: 1px; padding: 0; margin: -1px;
+  overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0;
+}
+
+/* Focus visible et cohérent avec l'univers */
+:focus { outline: none; }
+:focus-visible {
+  outline: 3px solid var(--cyan);
+  outline-offset: 3px;
+  box-shadow: 0 0 0 6px rgba(0, 229, 255, 0.25);
+}
+
+::selection { background: var(--pink); color: var(--abyss); }

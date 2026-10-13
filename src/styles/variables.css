@@ -1,0 +1,26 @@
+:root {
+  /* Palette principale */
+  --abyss: #080710;
+  --night: #171322;
+  --night-2: #211a35;
+  --lavender: #B9A0FF;
+  --moon: #F2DDFB;
+  --pink: #FF6EC7;
+  --cyan: #00E5FF;
+  --gold: #FFBE62;
+  /* compat anciens noms */
+  --orange: var(--gold);
+  --red: var(--pink);
+
+  --muted: #b3a6d0; /* texte secondaire, contraste ≥ 4.5:1 sur --night */
+  --line: #3a2f5c;
+
+  --f-pixel: 'Pixelify Sans', 'Silkscreen', 'Courier New', monospace;
+  --f-retro: 'Silkscreen', 'Pixelify Sans', 'Courier New', monospace;
+  --f-text: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  --f-mono: ui-monospace, 'Cascadia Mono', 'SF Mono', Menlo, Consolas, 'Liberation Mono', monospace;
+
+  --u: 3px; /* « pixel » du décor : toujours entier pour un rendu net */
+}
+@media (max-width: 600px) { :root { --u: 2px; } }
+@media (min-width: 1500px) { :root { --u: 4px; } }

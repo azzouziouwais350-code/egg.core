@@ -1,0 +1,82 @@
+/* Paysage Dreamcore : fixe, derrière tout. Animations = transform/opacity uniquement. */
+.landscape {
+  position: fixed; inset: 0; z-index: 0; overflow: hidden; pointer-events: none;
+  background: var(--abyss);
+}
+.sky {
+  position: absolute; inset: 0;
+  background: linear-gradient(180deg, var(--sky-top) 0%, var(--sky-mid) 55%, var(--sky-low) 100%);
+  transition: background 0.8s steps(8);
+}
+.horizon-glow {
+  position: absolute; left: 0; right: 0; bottom: 0; height: 55%;
+  background: radial-gradient(ellipse at 50% 100%, var(--horizon) 0%, transparent 65%);
+  opacity: calc(0.28 + var(--p) * 0.35);
+  transition: opacity 1s linear;
+}
+.phase-done .horizon-glow { opacity: 0.8; }
+
+.stars { position: absolute; inset: 0; }
+.star {
+  position: absolute; width: 3px; height: 3px; background: var(--moon); opacity: 0.8;
+  animation: twinkle 3.6s steps(4) infinite;
+}
+.star.t1 { background: var(--cyan); }
+.star.t2 { background: var(--lavender); }
+.star.big { width: 6px; height: 6px; box-shadow: 3px 0 0 inherit, -3px 0 0 inherit, 0 3px 0 inherit, 0 -3px 0 inherit; }
+.star.big { box-shadow: none; clip-path: polygon(40% 0, 60% 0, 60% 40%, 100% 40%, 100% 60%, 60% 60%, 60% 100%, 40% 100%, 40% 60%, 0 60%, 0 40%, 40% 40%); width: 12px; height: 12px; }
+@keyframes twinkle { 0%, 100% { opacity: 0.25; } 50% { opacity: 1; } }
+
+.sc {
+  position: absolute; height: auto; transform: translate(-50%, -50%);
+  will-change: transform;
+}
+.sc.flip { scale: -1 1; }
+.sc-z0 { opacity: 0.9; }
+.sc-z1 { opacity: 0.85; }
+.sc-z2 { opacity: 0.95; }
+.sc-z3 { opacity: 0.55; }
+
+.anim-drift { animation: drift 70s linear infinite alternate; }
+.anim-drift-rev { animation: drift 90s linear infinite alternate-reverse; }
+.anim-float { animation: float 7s ease-in-out infinite; }
+.anim-float-slow { animation: float 11s ease-in-out infinite; }
+.anim-pulse { animation: pulse 9s ease-in-out infinite; }
+.anim-spin { animation: spin 60s linear infinite; }
+.anim-portal { animation: portal 6s ease-in-out infinite; }
+@keyframes drift { from { transform: translate(calc(-50% - 40px), -50%); } to { transform: translate(calc(-50% + 40px), -50%); } }
+@keyframes float { 0%, 100% { transform: translate(-50%, calc(-50% - 6px)); } 50% { transform: translate(-50%, calc(-50% + 6px)); } }
+@keyframes pulse { 0%, 100% { opacity: 0.8; } 50% { opacity: 1; } }
+@keyframes spin { to { transform: translate(-50%, -50%) rotate(360deg); } }
+@keyframes portal { 0%, 100% { filter: brightness(0.9); } 50% { filter: brightness(1.15); } }
+
+/* Le portail s'illumine progressivement avec le temps écoulé */
+.landscape[data-scene='portal-arches'] .anim-portal { filter: brightness(calc(0.75 + var(--p) * 0.6)); animation: none; }
+
+.mist {
+  position: absolute; left: 0; right: 0; bottom: 0; height: 30%;
+  background: linear-gradient(180deg, transparent, rgba(8, 7, 16, 0.75));
+}
+
+/* Voile de lisibilité : les composants fonctionnels restent au premier plan */
+.landscape::after {
+  content: ''; position: absolute; inset: 0;
+  background: radial-gradient(ellipse at 50% 38%, rgba(8, 7, 16, 0) 0%, rgba(8, 7, 16, 0.35) 70%);
+}
+
+.particles { position: fixed; inset: 0; z-index: 1; pointer-events: none; width: 100%; height: 100%; }
+
+/* CRT très subtil */
+.crt {
+  position: fixed; inset: 0; z-index: 60; pointer-events: none; opacity: 0;
+  background: repeating-linear-gradient(0deg, rgba(0, 0, 0, 0.14) 0 1px, transparent 1px 3px);
+}
+.app[data-crt='on'] .crt { opacity: 0.5; }
+
+/* Animations désactivées (réglage) ou préférence système : tout est figé, rien d'informatif n'est perdu. */
+.app[data-anim='off'] *, .app[data-anim='off'] *::before, .app[data-anim='off'] *::after {
+  animation: none !important; transition: none !important;
+}
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
+}

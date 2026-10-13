@@ -1,0 +1,8 @@
+{
+  "name": "EggTimer — Dreamcore Pixel Fusion",
+  "image": "mcr.microsoft.com/devcontainers/javascript-node:22",
+  "forwardPorts": [3000],
+  "portsAttributes": { "3000": { "label": "EggTimer (dev)", "onAutoForward": "openPreview" } },
+  "postCreateCommand": "ELECTRON_SKIP_BINARY_DOWNLOAD=1 npm install",
+  "postAttachCommand": "npm run dev"
+}
