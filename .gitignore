@@ -1,2 +1,4 @@
-# Node.js
 node_modules/
+
+# Sortie du build webpack (régénérée par `npm run build` et par la CI)
+public/
